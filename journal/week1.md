@@ -1,5 +1,5 @@
 # Week 1 — App Containerization
-## Create a ne
+## Create a new GitHub repo
 Launch the repo within a Gitpod workspace
 Configure Gitpod.yml configuration, eg. I’m VSCode Extensions
 Clone the frontend and backend repo
