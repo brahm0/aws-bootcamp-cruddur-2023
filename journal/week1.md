@@ -23,3 +23,25 @@ Docker-compose file was made.
 ## Ensure we can orchestrate multiple containers to run side by side.
 
 ## Mount directories so we can make changes while we code
+
+# HOMEWORK : Implement a health check in the Docker compose file.
+
+##  i will implement and Configure the health check using our already set compose file byadding the lines below to our docker-compose file.
+
+version: "3.8"
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+        healthcheck:
+      test: curl --fail -s http://localhost:4567/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - ./backend-flask:/backend-flask
+      
