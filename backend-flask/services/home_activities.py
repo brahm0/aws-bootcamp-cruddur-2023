@@ -10,6 +10,7 @@ class HomeActivities:
       span = trace.get_current_span()
       now = datetime.now(timezone.utc).astimezone()
       span.set_attribute("app.now", now.isoformat())
+      User_id = "Ibrahim"
       results = [{
         'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
         'handle':  'Andrew Brown',
@@ -50,4 +51,9 @@ class HomeActivities:
       }
       ]
       span.set_attribute("app.result_length", len(results))
+      
+      # Homework
+      # Add custom instrumentation to Honeycomb to add more attributes.
+      span.set_attribute("app.User_id", User_id)
+
       return results
