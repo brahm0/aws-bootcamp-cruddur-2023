@@ -1,0 +1,13 @@
+#!/usr/bin/env pyhton3
+
+import boto3
+
+attrs = {
+    'endpoint_url': 'http://localhost:800'
+}
+
+if len(sys.argv) == 2:
+    if "prod" i sys.argsv[1]:
+        attrs = {}
+
+dynamodb = boto3.client('dynamodb',**attrs)

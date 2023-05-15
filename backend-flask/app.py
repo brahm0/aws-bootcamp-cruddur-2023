@@ -16,6 +16,7 @@ from services.create_message import *
 from services.show_activity import *
 
 from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
+from lib.momento import MomentoCounter
 
 # HoneyComb  -----------
 from opentelemetry import trace
@@ -50,17 +51,16 @@ from flask import got_request_exception
 # LOGGER.addHandler(cw_handler)
 # LOGGER.info("test log")
 
-# X-ray ------------
-#xray_url = os.getenv("AWS_XRAY_URL")
-#xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
-#XRayMiddleware(app, xray_recorder)
-
 # HoneyComb  -----------
 # Initialize tracing and an exporter that can send data to Honeycomb
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
+# X-ray ------------
+#xray_url = os.getenv("AWS_XRAY_URL")
+#xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+#XRayMiddleware(app, xray_recorder)
 
 # X-ray ------------
 xray_url = os.getenv("AWS_XRAY_URL")
@@ -82,7 +82,7 @@ cognito_jwt_token = CognitoJwtToken(
   region=os.getenv("AWS_DEFAULT_REGION")
 )
 # X-ray ------------
-XRayMiddleware(app, xray_recorder)  
+#XRayMiddleware(app, xray_recorder)  
 
 # HoneyComb  -----------
 # Initialize automatic instrumentation with Flask
